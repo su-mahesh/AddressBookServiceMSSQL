@@ -57,3 +57,8 @@ UPDATE TOP(3) AddressBook SET TYPE = 'FRIENDS';
 UPDATE AddressBook SET TYPE = 'FAMILY' WHERE FIRST_NAME = 'Rachel' or FIRST_NAME = 'MONICA';
 UPDATE AddressBook SET TYPE = 'PROFESSION' WHERE FIRST_NAME = 'chandler';
 
+--UC10 ability to get count of contacts by type
+SELECT TYPE, COUNT(*) AS TYPE_COUNT FROM AddressBook GROUP BY TYPE;
+
+
+
