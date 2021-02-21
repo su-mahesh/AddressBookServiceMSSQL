@@ -34,4 +34,10 @@ SELECT * FROM AddressBook;
 DELETE FROM AddressBook WHERE Last_Name = 'walt';
 SELECT * FROM AddressBook;
 
+--UC6 retrieve contact belong to city or state
+SELECT * FROM AddressBook WHERE CITY = 'New York';
+SELECT * FROM AddressBook WHERE STATE = 'CA';
+SELECT * FROM AddressBook WHERE CITY = 'LA' or STATE = 'MH';
+
+
 
