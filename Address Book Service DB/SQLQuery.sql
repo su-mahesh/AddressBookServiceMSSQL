@@ -46,3 +46,5 @@ SELECT * FROM AddressBook WHERE CITY = 'LA' or STATE = 'MH';
 SELECT CITY, COUNT(CITY) AS CITY_COUNT FROM AddressBook GROUP BY CITY;
 SELECT STATE, COUNT(STATE) AS STATE_COUNT FROM AddressBook GROUP BY STATE;
 
+--UC8 retrieve sorted entries by name for given city
+SELECT * FROM AddressBook WHERE CITY = 'New York' ORDER BY FIRST_NAME;
