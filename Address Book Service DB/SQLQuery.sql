@@ -26,6 +26,7 @@ VALUES('Bil', 'Gate', 'Win CA', 'LA', 'CA', '111000', '+1 3338884443', 'bil@gmai
 
 SELECT * FROM AddressBook;
 
---UC4 delete existing contact
+--UC4 edit existing contact
 UPDATE AddressBook SET Phone_Number = '+1 8474444444' WHERE First_Name = 'Jack'
 SELECT * FROM AddressBook;
+
