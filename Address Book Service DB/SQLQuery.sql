@@ -30,3 +30,8 @@ SELECT * FROM AddressBook;
 UPDATE AddressBook SET Phone_Number = '+1 8474444444' WHERE First_Name = 'Jack'
 SELECT * FROM AddressBook;
 
+--UC5 delete existing contact
+DELETE FROM AddressBook WHERE Last_Name = 'walt';
+SELECT * FROM AddressBook;
+
+
