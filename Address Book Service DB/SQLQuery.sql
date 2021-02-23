@@ -66,3 +66,21 @@ INSERT INTO AddressBook(FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_
 UPDATE AddressBook SET Type = 'FAMILY' WHERE Type IS NULL AND First_Name = 'Bil';
 
 SELECT ID, NAME, TYPE, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
+ 
+--UC12 Normalization
+CREATE table Type(TypeID int identity(1, 1), Type varchar(20),
+Constraint TypePrimaryKey PRIMARY KEY(TypeID)
+);
+
+INSERT INTO TYPE(Type) VALUES('Family'), ('Friends'), ('Profession');
+select * from Type;
+
+CREATE TABLE AddressBookType(ID int, TypeID int, 
+Constraint AddressBookType_ID_ForeignKey FOREIGN KEY(ID) REFERENCES AddressBook(ID),
+Constraint AddressBookType_Type_ForeignKey FOREIGN KEY(ID) REFERENCES Type(TypeID)
+);
+
+ALTER TABLE AddressBook DROP COLUMN Type
+
+SELECT ID, NAME, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
+delete from AddressBook;
