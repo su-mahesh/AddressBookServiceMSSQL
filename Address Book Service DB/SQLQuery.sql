@@ -1,6 +1,6 @@
 --UC1 create database Address Book Service DB
 CREATE DATABASE AddressBookService;
-use AddressBookService;
+USE AddressBookService;
 
 --UC2 create Address Book table
 CREATE TABLE AddressBook
@@ -49,10 +49,11 @@ SELECT STATE, COUNT(STATE) AS STATE_COUNT FROM AddressBook GROUP BY STATE;
 --UC8 retrieve sorted entries by name for given city
 SELECT * FROM AddressBook WHERE CITY = 'New York' ORDER BY FIRST_NAME;
 
---UC9 ability identify each address book with name and time
+--UC9 ability identify each address book with name and type
 ALTER table AddressBook ADD Name AS FIRST_NAME+' '+LAST_NAME;
 ALTER table AddressBook ADD TYPE VARCHAR(20);
-SELECT NAME,TYPE, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
+
+SELECT NAME, TYPE, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
 UPDATE TOP(3) AddressBook SET TYPE = 'FRIENDS';
 UPDATE AddressBook SET TYPE = 'FAMILY' WHERE FIRST_NAME = 'Rachel' or FIRST_NAME = 'MONICA';
 UPDATE AddressBook SET TYPE = 'PROFESSION' WHERE FIRST_NAME = 'chandler';
@@ -60,5 +61,8 @@ UPDATE AddressBook SET TYPE = 'PROFESSION' WHERE FIRST_NAME = 'chandler';
 --UC10 ability to get count of contacts by type
 SELECT TYPE, COUNT(*) AS TYPE_COUNT FROM AddressBook GROUP BY TYPE;
 
+--UC11 ability to add person to both family and friends
+INSERT INTO AddressBook(FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL) SELECT FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook WHERE First_Name = 'Bil';
+UPDATE AddressBook SET Type = 'FAMILY' WHERE Type IS NULL AND First_Name = 'Bil';
 
-
+SELECT ID, NAME, TYPE, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
