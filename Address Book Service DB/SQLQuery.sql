@@ -81,6 +81,24 @@ Constraint AddressBookType_Type_ForeignKey FOREIGN KEY(ID) REFERENCES Type(TypeI
 );
 
 ALTER TABLE AddressBook DROP COLUMN Type
+--Create PhoneNumber table
+CREATE TABLE PhoneNumber(
+ID int,
+PhoneNumber varchar(14), 
+constraint AddressBookToPhoneNumber_ForeignKey foreign Key(ID) REFERENCES AddressBook(ID)
+);
 
-SELECT ID, NAME, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
+ALTER TABLE AddressBook DROP COLUMN PHONE_NUMBER;
+
+CREATE TABLE Email(
+ID int,
+Email varchar(50), 
+constraint AddressBookToEmail_ForeignKey foreign Key(ID) REFERENCES AddressBook(ID)
+);
+
+ALTER TABLE AddressBook DROP COLUMN Email;
+
+SELECT ID, NAME, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP FROM AddressBook;
+
 delete from AddressBook;
+
