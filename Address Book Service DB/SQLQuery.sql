@@ -68,17 +68,19 @@ UPDATE AddressBook SET Type = 'FAMILY' WHERE Type IS NULL AND First_Name = 'Bil'
 SELECT ID, NAME, TYPE, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP, PHONE_NUMBER, EMAIL FROM AddressBook;
  
 --UC12 Normalization
-CREATE table Type(TypeID int identity(1, 1), Type varchar(20),
+CREATE table ContactType(
+TypeID		int identity(1, 1),
+ContactType varchar(20),
 Constraint TypePrimaryKey PRIMARY KEY(TypeID)
 );
 
-INSERT INTO TYPE(Type) VALUES('Family'), ('Friends'), ('Profession');
-select * from Type;
+INSERT INTO ContactType(ContactType) VALUES('Family'), ('Friends'), ('Profession');
+select * from ContactType;
 
 CREATE TABLE AddressBookType(ID int, TypeID int, 
-Constraint AddressBookType_ID_ForeignKey FOREIGN KEY(ID) REFERENCES AddressBook(ID),
-Constraint AddressBookType_Type_ForeignKey FOREIGN KEY(ID) REFERENCES Type(TypeID)
-);
+Constraint AddressBookType_ID_ForeignKey FOREIGN KEY(ID) REFERENCES AddressBook(ID) on delete cascade,
+Constraint AddressBookType_TypeID_ForeignKey FOREIGN KEY(TypeID) REFERENCES ContactType(TypeID)
+on delete cascade);
 
 ALTER TABLE AddressBook DROP COLUMN Type
 --Create PhoneNumber table
@@ -86,7 +88,7 @@ CREATE TABLE PhoneNumber(
 ID int,
 PhoneNumber varchar(14), 
 constraint AddressBookToPhoneNumber_ForeignKey foreign Key(ID) REFERENCES AddressBook(ID)
-);
+on delete cascade);
 
 ALTER TABLE AddressBook DROP COLUMN PHONE_NUMBER;
 
@@ -94,7 +96,7 @@ CREATE TABLE Email(
 ID int,
 Email varchar(50), 
 constraint AddressBookToEmail_ForeignKey foreign Key(ID) REFERENCES AddressBook(ID)
-);
+on delete cascade);
 
 ALTER TABLE AddressBook DROP COLUMN Email;
 
@@ -102,3 +104,52 @@ SELECT ID, NAME, FIRST_NAME, LAST_NAME, ADDRESS, CITY, STATE, ZIP FROM AddressBo
 
 delete from AddressBook;
 
+--UC13 execute retrieve queries
+INSERT INTO AddressBook(First_Name, Last_Name, Address, City, State, Zip)
+VALUES('Bil', 'Gate', 'Win CA', 'LA', 'CA', '111000'),
+('Jack', 'Bale', 'Win WN', 'Din', 'WN', '111055'),
+('Terissa', 'kane', 'san MH', 'New York', 'MH', '151055'),
+('Charlie', 'walt', 'sengen IO', 'Wiscosin', 'IO', '441055'),
+('Rachel', 'Bale', 'Win WN', 'Din', 'WN', '111055'),
+('monica', 'geller', 'san MH', 'New York', 'MH', '151055'),
+('chandler', 'stein', 'sengen IO', 'Wiscosin', 'IO', '441055');
+
+INSERT INTO PhoneNumber(ID, PhoneNumber) select ID, '+91 5566442233' from AddressBook;
+INSERT INTO Email(ID) select ID from AddressBook;
+
+INSERT INTO AddressBookType(ID, TypeID) 
+select AddressBook.ID, ContactType.TypeID from AddressBook, ContactType 
+where ContactType = 'Family' and First_Name = 'Bil';
+
+INSERT INTO AddressBookType(ID, TypeID) 
+select AddressBook.ID, ContactType.TypeID from AddressBook, ContactType 
+where ContactType = 'Friends' and First_Name = 'Bil';
+
+SELECT AddressBook.ID, Name, ContactType from AddressBook, ContactType, AddressBookType
+where AddressBook.ID = AddressBookType.ID and ContactType.TypeID = AddressBookType.TypeID
+
+delete from AddressBook where Name = 'Jack bale'; 
+
+SELECT CITY, COUNT(CITY) AS CITY_COUNT FROM AddressBook GROUP BY CITY;
+SELECT STATE, COUNT(STATE) AS STATE_COUNT FROM AddressBook GROUP BY STATE;
+
+SELECT AddressBook.ID, Name, First_Name, Last_Name, City, Email, PhoneNumber
+from AddressBook, Email, PhoneNumber where AddressBook.ID = Email.ID 
+and AddressBook.ID = PhoneNumber.ID and City = 'New York' ORDER BY Name;
+
+SELECT AddressBook.ID, Name, First_Name, Last_Name, Email, PhoneNumber, ContactType
+from AddressBook, Email, PhoneNumber, ContactType, AddressBookType
+where AddressBook.ID = Email.ID and AddressBook.ID = PhoneNumber.ID and AddressBook.ID = AddressBookType.ID
+and ContactType.TypeID = AddressBookType.TypeID
+
+Select ContactType, Count(ContactType) as Type_Count
+from  AddressBook, ContactType, AddressBookType
+where AddressBook.ID = AddressBookType.ID
+and ContactType.TypeID = AddressBookType.TypeID Group by ContactType;
+
+
+select * from ContactType
+select * from AddressBookType
+select * from AddressBook
+select * from PhoneNumber
+select * from Email
