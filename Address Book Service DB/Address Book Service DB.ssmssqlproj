@@ -25,17 +25,47 @@
           <AssociatedConnUserName>mahesh</AssociatedConnUserName>
           <FullPath>SQLQuery.sql</FullPath>
         </FileNode>
-        <FileNode Name="UC1.sql">
+        <FileNode Name="UC16 retrieve all entries procedure.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
           <AssociatedConnUserName>mahesh</AssociatedConnUserName>
-          <FullPath>UC1.sql</FullPath>
+          <FullPath>UC16 retrieve all entries procedure.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UC17_UpdateEntry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
+          <AssociatedConnUserName>mahesh</AssociatedConnUserName>
+          <FullPath>UC17_UpdateEntry.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UC19 Retrieve no of contacts by city.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
+          <AssociatedConnUserName>mahesh</AssociatedConnUserName>
+          <FullPath>UC19 Retrieve no of contacts by city.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UC19_AbilityToRetrieveContactsInState.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
+          <AssociatedConnUserName>mahesh</AssociatedConnUserName>
+          <FullPath>UC19_AbilityToRetrieveContactsInState.sql</FullPath>
         </FileNode>
         <FileNode Name="UC2.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
           <AssociatedConnUserName>mahesh</AssociatedConnUserName>
           <FullPath>UC2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UC20 AbilityToContactToDB.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>UC20 AbilityToContactToDB.sql</FullPath>
+        </FileNode>
+        <FileNode Name="UC20.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>(localdb)\MSSQLLocalDB</AssociatedConnSrvName>
+          <AssociatedConnUserName>mahesh</AssociatedConnUserName>
+          <FullPath>UC20.sql</FullPath>
         </FileNode>
         <FileNode Name="UC3.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:(localdb)\MSSQLLocalDB:False:mahesh</AssociatedConnectionMoniker>

@@ -11,7 +11,7 @@ Last_Name		varchar(50),
 Address			varchar(50),
 City			varchar(50),
 State			varchar(50),
-Zip				int,
+Zip				varchar(7),
 Phone_Number	varchar(14),
 Email			varchar(50),
 PRIMARY KEY(ID)
@@ -146,10 +146,42 @@ Select ContactType, Count(ContactType) as Type_Count
 from  AddressBook, ContactType, AddressBookType
 where AddressBook.ID = AddressBookType.ID
 and ContactType.TypeID = AddressBookType.TypeID Group by ContactType;
+alter table Addressbook alter column Zip varchar(7);
 
+select AddressBook.ID, Name, First_Name, Last_Name, PhoneNumber, Address, City, State, Zip, Email, ContactType
+from AddressBook
+left join Email on AddressBook.ID = Email.ID
+left join PhoneNumber on AddressBook.ID = PhoneNumber.ID 
+left join AddressBookType on AddressBook.ID = AddressBookType.ID
+left join ContactType on AddressBookType.TypeID = ContactType.TypeID 
 
 select * from ContactType
 select * from AddressBookType
 select * from AddressBook
 select * from PhoneNumber
 select * from Email
+
+delete from AddressBook;
+
+exec dbo.Er_UpdateAddressBook 'Bil Gate', 'Bil',
+'Gate',  'Win CA', 'LA', 'CA', '111000',  '+1 5747472234', 'm'
+
+DECLARE @ID INTEGER
+SET @ID = (
+SELECT ID FROM AddressBook WHERE Name = 'Bil Gate' )
+print @ID
+
+Use AddressBookService;
+
+select AddressBook.ID, Name, First_Name, Last_Name, PhoneNumber, Address, City, State, Zip, Email, Added_Date, ContactType
+from AddressBook
+left join Email on AddressBook.ID = Email.ID
+left join PhoneNumber on AddressBook.ID = PhoneNumber.ID 
+left join AddressBookType on AddressBook.ID = AddressBookType.ID
+left join ContactType on AddressBookType.TypeID = ContactType.TypeID 
+
+insert into PhoneNumber(ID) select ID from AddressBook
+insert into Email(ID) select ID from AddressBook
+
+UPDATE Email SET Email = 'bg'
+where ID = (select ID from AddressBook where Name = 'Bil Gate');
